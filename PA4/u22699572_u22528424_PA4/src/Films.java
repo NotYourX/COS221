@@ -117,3 +117,45 @@ public prac4() {
             }
         });
         add(button, BorderLayout.SOUTH);
+}
+
+public String[][] getAllFilms() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        String[][] arr = new String[1010][12];
+        String url = "jdbc:mysql://localhost:3306/sakila";
+        String username = "root";
+        String password = "Bakkies1";
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(url, username, password);
+
+            stmt = conn.createStatement();
+            String SQL = "SELECT * FROM film";
+            rs = stmt.executeQuery(SQL);
+            int x = 0;
+            while (rs.next()) {
+                //System.out.println(rs.getString("first_name")+rs.getString("last_name"));
+                arr[x][0] = rs.getString("film_id");
+                arr[x][1] = rs.getString("title");
+                arr[x][2] = rs.getString("release_year");
+                arr[x][3] = rs.getString("description");
+                arr[x][4] = rs.getString("language_id");
+                arr[x][5] = rs.getString("original_language_id");
+                arr[x][6] = rs.getString("rental_duration");
+                arr[x][7] = rs.getString("rental_rate");
+                arr[x][8] = rs.getString("length");
+                arr[x][9] = rs.getString("replacement_cost");
+                arr[x][10] = rs.getString("rating");
+                arr[x][11] = rs.getString("special_features");
+                x++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return arr;
+    }
