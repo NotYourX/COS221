@@ -15,27 +15,21 @@ public class prac4 extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 450);
         setLocationRelativeTo(null);
-
-        // Create a menu bar
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
-
-        // Create a menu with three items
         JMenu menu = new JMenu("Tabs");
         menuBar.add(menu);
-
+        
         JMenuItem tab1Item = new JMenuItem("Staff");
         JMenuItem tab2Item = new JMenuItem("Films");
         JMenuItem tab3Item = new JMenuItem("Reports");
         JMenuItem tab4Item = new JMenuItem("Notifications");
 
-        // Add the items to the menu
         menu.add(tab1Item);
         menu.add(tab2Item);
         menu.add(tab3Item);
         menu.add(tab4Item);
 
-        // Create a tabbed pane with three tabs
         JTabbedPane tabbedPane = new JTabbedPane();
         getContentPane().add(tabbedPane);
 
@@ -44,13 +38,11 @@ public class prac4 extends JFrame {
         JPanel tab3 = new JPanel();
         JPanel tab4 = new JPanel();
 
-        // Add the tabs to the tabbed pane
         tabbedPane.addTab("Staff", tab1);
         tabbedPane.addTab("Films", tab2);
         tabbedPane.addTab("Reports", tab3);
         tabbedPane.addTab("Notifications", tab4);
 
-        // Add action listeners to the menu items
         tab1Item.addActionListener(e -> tabbedPane.setSelectedIndex(0));
         tab2Item.addActionListener(e -> tabbedPane.setSelectedIndex(1));
         tab3Item.addActionListener(e -> tabbedPane.setSelectedIndex(2));
