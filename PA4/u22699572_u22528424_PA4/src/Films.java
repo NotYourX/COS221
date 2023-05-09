@@ -68,9 +68,14 @@ public prac4() {
                     saveButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             String title = titleField.getText();
-                            int release_date = Integer.parseInt(release_dateField.getText());
-                            String release_year = release_date + "/01/01";
-                            Date year = Date.valueOf(release_year);
+                            //-----------------------------------------help
+                            int year = Integer.parseInt(release_dateField.getText());
+                            /*Date year = toDate(release_date);
+
+                            String year1 = release_dateField.getText();
+                            Year year = Year.parse(year1);
+                            System.out.println(year);*/
+                            //---------------------------------------------
                             String description = descriptionField.getText();
                             String language = languageField.getText();
                             String original_language = original_languageField.getText();
@@ -78,15 +83,14 @@ public prac4() {
                             float rental_rate = Float.parseFloat(rental_rateField.getText());
                             int length = Integer.parseInt(lengthField.getText());
                             String rating = ratingField.getText();
-                            int replacement_cost = Integer.parseInt(replacement_costField.getText());
+                            Float replacement_cost = Float.parseFloat(replacement_costField.getText());
                             String special_feature = special_featureField.getText();
-
-
+                            
                             try {
                                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", "root", "Bakkies1");
-                                PreparedStatement stmt = conn.prepareStatement("INSERT INTO film (title, release_year, description, language, original_language, rental_duration, rental_rate, length, replacement_cost, rating, special_feature) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                PreparedStatement stmt = conn.prepareStatement("INSERT INTO film (title, release_year, description, language_id, original_language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                                 stmt.setString(1, title);
-                                stmt.setDate(2, year);
+                                stmt.setInt(2,  year);
                                 stmt.setString(3, description);
                                 stmt.setString(4, language);
                                 stmt.setString(5, original_language);
@@ -94,7 +98,7 @@ public prac4() {
                                 stmt.setFloat(7, rental_rate);
                                 stmt.setInt(8, length);
                                 stmt.setString(9, rating);
-                                stmt.setInt(10, replacement_cost);
+                                stmt.setFloat(10, replacement_cost);
                                 stmt.setString(11, special_feature);
                                 stmt.executeUpdate();
                                 conn.close();
@@ -117,6 +121,9 @@ public prac4() {
             }
         });
         add(button, BorderLayout.SOUTH);
+        
+        
+       
 }
 
 public String[][] getAllFilms() {
