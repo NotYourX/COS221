@@ -16,6 +16,14 @@ import java.util.regex.PatternSyntaxException;
 
 public class prac4 extends JFrame {
 
+    String dvdrental_DB_PROTO = "jdbc:mysql://";
+    String dvdrental_DB_HOST = "localhost:";
+    String dvdrental_DB_PORT = "3306";
+    String dvdrental_DB_NAME = "/u22699572_u22528424_sakila";
+    String dvdrental_DB_USERNAME = "root";
+    String dvdrental_DB_PASSWORD = "X1dr31n1";
+
+
     DefaultTableModel ClientModel;
         
     JTable ClientTable;
@@ -228,7 +236,7 @@ public class prac4 extends JFrame {
                             }
 
                             try {
-                                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/u22699572_u22528424_sakila", "root", "X1dr31n1");
+                                Connection conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
 
                                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO film (title, release_year, description, language_id, original_language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                                 stmt.setString(1, title);
@@ -377,13 +385,12 @@ public class prac4 extends JFrame {
         Statement stmt = null;
         ResultSet rs = null;
         String[][] arr = new String[2][12];
-        String url = "jdbc:mysql://localhost:3306/u22699572_u22528424_sakila";
-        String username = "root";
-        String password = "X1dr31n1";
+        
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+
 
             stmt = conn.createStatement();
             String SQL = "SELECT c.customer_id, c.first_name, c.last_name, c.email, a.address, ci.city, a.phone, c.store_id, c.active"+
@@ -432,7 +439,7 @@ public class prac4 extends JFrame {
     public void DropClient(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/u22699572_u22528424_sakila", "root", "X1dr31n1");
+            Connection conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
             String SQL ="ALTER TABLE payment DROP CONSTRAINT fk_payment_customer;";
             PreparedStatement stmt1 = conn.prepareStatement(SQL);
             // stmt1.executeUpdate();
@@ -472,7 +479,8 @@ public class prac4 extends JFrame {
 
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/u22699572_u22528424_sakila", "root", "X1dr31n1");
+                    Connection conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+
                     PreparedStatement stmt1 = conn.prepareStatement("DELETE  FROM customer Where customer_id=" + clientID.getText());
                     stmt1.execute();
                     
@@ -519,7 +527,8 @@ public class prac4 extends JFrame {
 
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/u22699572_u22528424_sakila", "root", "X1dr31n1");
+                    Connection conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+
                     Statement stmt1 = conn.createStatement();
                     String SQL = "SELECT * FROM customer Where customer_id=" + clientID.getText();
                     ResultSet rs = stmt1.executeQuery(SQL);
@@ -608,7 +617,8 @@ public class prac4 extends JFrame {
                                         String city = (String) cityF.getSelectedItem();
                                         try {
                                             Class.forName("com.mysql.cj.jdbc.Driver");
-                                            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/u22699572_u22528424_sakila", "root", "X1dr31n1");
+                                            Connection conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+
                                             Statement stmt1 = conn.createStatement();
                                             String SQL = "SELECT * FROM city Where city = '" + city +"'";
                                             ResultSet rs = stmt1.executeQuery(SQL);
@@ -777,7 +787,8 @@ public class prac4 extends JFrame {
                 String city = (String) cityF.getSelectedItem();
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/u22699572_u22528424_sakila", "root", "X1dr31n1");
+                    Connection conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+
                     Statement stmt1 = conn.createStatement();
                     String SQL = "SELECT * FROM city Where city = '" + city +"'";
                     ResultSet rs = stmt1.executeQuery(SQL);
@@ -841,7 +852,8 @@ public class prac4 extends JFrame {
                 // check if user exists
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/u22699572_u22528424_sakila", "root", "X1dr31n1");
+                    Connection conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+
                     Statement stmt1 = conn.createStatement();
                     String SQL = "SELECT * FROM customer Where email = '" + email + "'";
                     ResultSet rs = stmt1.executeQuery(SQL);
@@ -862,7 +874,8 @@ public class prac4 extends JFrame {
 
 
                 try {
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/u22699572_u22528424_sakila", "root", "X1dr31n1");
+                    Connection conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+
                     // insert address
                     PreparedStatement stmt = conn.prepareStatement("INSERT INTO  address(address,address2, district,city_id, postal_code,phone, last_update) VALUES (?, ?, ?, ?, ?, ?, NOW())");
                     stmt.setString(1, address);
@@ -920,13 +933,11 @@ public class prac4 extends JFrame {
         ResultSet rsCNT = null;
         
         String[] arr = new String[0];
-        String url = "jdbc:mysql://localhost:3306/u22699572_u22528424_sakila";
-        String username = "root";
-        String password = "X1dr31n1";
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+
 
             int result = 0;
             stmt2 = conn.createStatement();
@@ -965,13 +976,11 @@ public class prac4 extends JFrame {
         Statement stmt = null;
         ResultSet rs = null;
         String[][] arr = new String[2][12];
-        String url = "jdbc:mysql://localhost:3306/u22699572_u22528424_sakila";
-        String username = "root";
-        String password = "X1dr31n1";
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+            
 
             stmt = conn.createStatement();
             String SQL = "SELECT c.customer_id, c.first_name, c.last_name, c.email, a.address, ci.city, a.phone, c.store_id, c.active"+
@@ -1022,13 +1031,11 @@ public class prac4 extends JFrame {
         Statement stmt = null;
         ResultSet rs = null;
         String[][] arr = new String[2][12];
-        String url = "jdbc:mysql://localhost:3306/u22699572_u22528424_sakila";
-        String username = "root";
-        String password = "X1dr31n1";
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+
 
             stmt = conn.createStatement();
             String SQL = "SELECT s.first_name, s.last_name, a.address, a.address2, a.district, c.city, a.postal_code, a.phone, s.store_id, s.active, s.last_update FROM staff AS s INNER JOIN address AS a ON s.address_id = a.address_id INNER JOIN city AS c ON a.city_id = c.city_id";
@@ -1061,13 +1068,11 @@ public class prac4 extends JFrame {
         Statement stmt = null;
         ResultSet rs = null;
         String[][] arr = new String[1010][12];
-        String url = "jdbc:mysql://localhost:3306/u22699572_u22528424_sakila";
-        String username = "root";
-        String password = "X1dr31n1";
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+
 
             stmt = conn.createStatement();
             String SQL = "SELECT * FROM film";
@@ -1102,13 +1107,11 @@ public class prac4 extends JFrame {
         Statement stmt = null;
         ResultSet rs = null;
         String[][] arr = new String[1][3];
-        String url = "jdbc:mysql://localhost:3306/u22699572_u22528424_sakila";
-        String username = "root";
-        String password = "X1dr31n1";
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+
 
             stmt = conn.createStatement();
             String SQL = "SELECT i.store_id, c.name, COUNT(i.inventory_id) AS NumFilms"+
@@ -1148,13 +1151,11 @@ public class prac4 extends JFrame {
         Connection conn = null;
         Statement stmt2 = null;
         ResultSet rsCNT = null;
-        String url = "jdbc:mysql://localhost:3306/u22699572_u22528424_sakila";
-        String username = "root";
-        String password = "X1dr31n1";
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+
 
             //----------------------------------------------get-result--------------------------------------------------
             stmt2 = conn.createStatement();
@@ -1180,13 +1181,11 @@ public class prac4 extends JFrame {
         Statement stmt = null;
         ResultSet rs = null;
         String[] arr = new String[getNumOfLanguages()+1];//****************************************************************
-        String url = "jdbc:mysql://localhost:3306/u22699572_u22528424_sakila";
-        String username = "root";
-        String password = "X1dr31n1";
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+            
             stmt = conn.createStatement();
             String SQL = "SELECT * FROM language";
             rs = stmt.executeQuery(SQL);
@@ -1211,13 +1210,11 @@ public class prac4 extends JFrame {
         Connection conn = null;
         Statement stmt2 = null;
         ResultSet rsCNT = null;
-        String url = "jdbc:mysql://localhost:3306/u22699572_u22528424_sakila";
-        String username = "root";
-        String password = "X1dr31n1";
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(dvdrental_DB_PROTO+dvdrental_DB_HOST+dvdrental_DB_NAME, dvdrental_DB_USERNAME, dvdrental_DB_PASSWORD);
+            
 
             //----------------------------------------------get-result--------------------------------------------------
             stmt2 = conn.createStatement();
